@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calorie Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #tracker {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      margin: auto;
+    }
+
+    input[type="text"], input[type="number"] {
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .meal-list {
+      margin-top: 20px;
+    }
+
+    .meal-item {
+      background-color: #e9ecef;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    #total-calories {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Calorie Tracker</h1>
+
+  <div id="tracker">
+    <input type="text" id="meal-name" placeholder="Meal Name" required>
+    <input type="number" id="meal-calories" placeholder="Calories" required>
+    <button onclick="addMeal()">Add Meal</button>
+    
+    <div class="meal-list" id="meal-list">
+      <!-- Meals will be displayed here -->
+    </div>
+
+    <div id="total-calories">Total Calories: 0</div>
+  </div>
+
+  <script>
+    let totalCalories = 0;
+
+    // Function to add a new meal
+    function addMeal() {
+      const mealName = document.getElementById('meal-name').value;
+      const mealCalories = document.getElementById('meal-calories').value;
+
+      if (mealName === "" || mealCalories === "") {
+        alert("Please enter both the meal name and calories.");
+        return;
+      }
+
+      // Update total calories
+      totalCalories += parseInt(mealCalories);
+      document.getElementById('total-calories').textContent = `Total Calories: ${totalCalories}`;
+
+      // Create meal item
+      const mealList = document.getElementById('meal-list');
+      const mealItem = document.createElement('div');
+      mealItem.classList.add('meal-item');
+      mealItem.textContent = `${mealName} - ${mealCalories} calories`;
+
+      // Append the meal to the list
+      mealList.appendChild(mealItem);
+
+      // Clear the input fields
+      document.getElementById('meal-name').value = '';
+      document.getElementById('meal-calories').value = '';
+    }
+  </script>
+
+</body>
+</html>
